@@ -6,7 +6,7 @@ import noonight.study.students_record_book.common.loading.LoadingView;
 /*
 * LoadingView: LoadingDialog
 * */
-public interface BaseView extends LoadingView{
+public interface BaseViewInterface extends LoadingView{
 
     void showMessage(String message);
 
