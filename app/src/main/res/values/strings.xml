@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Student\'s_record_book</string>
-    <string name="please_wait">Please wait ...</string>
+    <string name="please_wait">Загрузка</string>
+    <string name="mock_data">Mock data here ...</string>
+    <string name="student_name">Name</string>
+    <string name="student_num_book">Зачетная книжка №</string>
+    <string name="otdelenie">Отделение</string>
+    <string name="facultet">Факультет</string>
+    <string name="specialnost">Специальность</string>
 </resources>

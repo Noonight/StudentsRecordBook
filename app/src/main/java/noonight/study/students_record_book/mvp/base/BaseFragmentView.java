@@ -2,7 +2,10 @@ package noonight.study.students_record_book.mvp.base;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import noonight.study.students_record_book.common.loading.LoadingDialog;
@@ -12,10 +15,16 @@ public abstract class BaseFragmentView<T extends BasePresenter> extends Fragment
 
     protected T presenter;
 
-    private LoadingView loadingView;
+    protected LoadingView loadingView;
 
     public BaseFragmentView() {
-        initLoadingView();
+        //initLoadingView();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        bindView();
     }
 
     protected void attachPresenter(T presenter) {
@@ -34,11 +43,14 @@ public abstract class BaseFragmentView<T extends BasePresenter> extends Fragment
         return presenter;
     }
 
+    // do on view created method
     protected abstract void bindView();
 
-    private void initLoadingView() {
-        loadingView = LoadingDialog.view(getActivity().getSupportFragmentManager());
-    }
+    // code like that
+    /*
+    * loadingView = LoadingDialog.view(getActivity().getSupportFragmentManager());
+    * */
+    protected abstract void initLoadingView();
 
     protected boolean loadingIsSetup() {
         return loadingView != null;

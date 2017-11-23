@@ -1,8 +1,7 @@
 package noonight.study.students_record_book.mvp.base;
 
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -17,6 +16,10 @@ public abstract class BaseActivityView<T extends BasePresenter> extends AppCompa
 
     public BaseActivityView() {
         initLoadingView();
+    }
+
+    public FragmentManager activitySupportFragmentManager() {
+        return this.getSupportFragmentManager();
     }
 
     protected void attachPresenter(T presenter) {
