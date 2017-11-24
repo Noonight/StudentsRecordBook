@@ -2,6 +2,7 @@ package noonight.study.students_record_book.mvp.view.sliding
 
 import android.content.Context
 import android.os.Bundle
+import android.os.SystemClock
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -37,6 +38,7 @@ class RootPageFragment : BaseFragmentView<RootPresenter>(), RootView {
     }
 
     init {
+        //SystemClock.sleep(10000)
         person = XmlHelper.readXml()
         attachPresenter(RootPresenter())
 

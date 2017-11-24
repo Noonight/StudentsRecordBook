@@ -12,19 +12,37 @@ import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
+import butterknife.BindView
+import butterknife.ButterKnife
 
 
 class StudentHomeActivity : BaseActivityView<StudentHomePresenter>(), HomeView {
 
+    @BindView(R.id.write)
+    lateinit var write: Button
+    @BindView(R.id.read)
+    lateinit var read: Button
+    @BindView(R.id.menu)
+    lateinit var menu: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_home)
-        showRootPageFragment()
+        //showRootPageFragment()
         if (shouldAskPermissions()) {
             askPermissions();
         }
+        ButterKnife.bind(this)
+        write.setOnClickListener({ XmlHelper.writeXml() })
+        read.setOnClickListener({
+            //XmlHelper.readXml()
+            showRootPageFragment()
+            menu.setVisibility(View.GONE)
+        })
         //getPresenter().attachView(this)
-        XmlHelper.writeXml()
+        //XmlHelper.writeXml()
     }
 
     init {

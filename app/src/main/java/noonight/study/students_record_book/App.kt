@@ -1,6 +1,7 @@
 package noonight.study.students_record_book
 
 import android.app.Application
+import noonight.study.students_record_book.mvp.repository.XmlHelper
 
 
 class App : Application() {
@@ -14,6 +15,8 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        //XmlHelper.writeXml()
+
         mInstance = this
     }
 
