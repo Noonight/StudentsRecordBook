@@ -7,4 +7,7 @@
     <string name="otdelenie">Отделение</string>
     <string name="facultet">Факультет</string>
     <string name="specialnost">Специальность</string>
+    <string name="zacheti">Зачеты</string>
+    <string name="eczameni">Экзамены</string>
+    <string name="nazvanie">Название</string>
 </resources>

@@ -16,7 +16,10 @@ import noonight.study.students_record_book.common.Log
 import noonight.study.students_record_book.common.inflate
 import noonight.study.students_record_book.common.loading.LoadingDialog
 import noonight.study.students_record_book.mvp.base.BaseFragmentView
-import noonight.study.students_record_book.mvp.view.sliding.pages.FirstPageFragment
+import noonight.study.students_record_book.mvp.model.Person
+import noonight.study.students_record_book.mvp.repository.XmlHelper
+import noonight.study.students_record_book.mvp.view.sliding.pages.first.FirstPageFragment
+import noonight.study.students_record_book.mvp.view.sliding.pages.zachetieczameni.ZachetiEczamenFragment
 
 
 class RootPageFragment : BaseFragmentView<RootPresenter>(), RootView {
@@ -30,10 +33,18 @@ class RootPageFragment : BaseFragmentView<RootPresenter>(), RootView {
             itFragment.arguments = args
             return itFragment
         }
+        lateinit var person: Person
     }
 
     init {
+        person = XmlHelper.readXml()
         attachPresenter(RootPresenter())
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        //getPresenter().attachView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,14 +59,16 @@ class RootPageFragment : BaseFragmentView<RootPresenter>(), RootView {
     }
 
     override fun bindView() {
-
+        getPresenter().updateView()
     }
 
-    private class ScreenSlidePageAdapter(fm: FragmentManager, context: Context) : FragmentStatePagerAdapter(fm) {
+    class ScreenSlidePageAdapter(fm: FragmentManager, context: Context) : FragmentStatePagerAdapter(fm) {
 
-        val listOfPage: MutableList<Fragment>? = null
+        var listOfPage: ArrayList<Fragment> = ArrayList()
 
-
+        init {
+            addFragments()
+        }
 
         override fun getItem(position: Int): Fragment {
 
@@ -64,11 +77,22 @@ class RootPageFragment : BaseFragmentView<RootPresenter>(), RootView {
             } else {
 
             }
-            return FirstPageFragment()
+            return listOfPage.get(position)
+        }
+
+        fun addFragments() {
+            listOfPage.add(FirstPageFragment())
+            Log.d(listOfPage.size.toString())
+            Log.d("------------------------------------------------------------")
+            for (i in 0..person.sessions!!.size-1){
+                var bundle = Bundle()
+                bundle.putInt("position", i)
+                listOfPage.add(ZachetiEczamenFragment.newInstance(person.sessions!![i].numSessions))
+            }
         }
 
         override fun getCount(): Int {
-            if (listOfPage != null && listOfPage.size > 0) {
+            if (listOfPage.size > 0) {
                 return listOfPage.size
             } else {
                 return 1

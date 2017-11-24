@@ -18,7 +18,7 @@ public abstract class BasePresenter<V extends BaseViewInterface> implements Base
         view = null;
     }
 
-    protected abstract void updateView();
+    public abstract void updateView();
 
     protected boolean setupDone() {
         return view != null;
